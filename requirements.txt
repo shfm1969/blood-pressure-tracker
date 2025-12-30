@@ -1,0 +1,17 @@
+# 資料庫
+sqlalchemy>=2.0.0
+
+# 資料處理與分析
+pandas>=2.0.0
+numpy>=1.24.0
+
+# 圖表繪製
+matplotlib>=3.7.0
+plotly>=5.14.0
+
+# PDF 導出
+reportlab>=4.0.0
+
+# 日期時間處理
+python-dateutil>=2.8.0
+
