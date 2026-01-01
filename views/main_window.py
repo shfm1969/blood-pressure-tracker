@@ -365,13 +365,29 @@ class AddRecordDialog:
         # 脈搏
         tk.Label(form_frame, text="脈搏 (bpm):", 
                 font=('Microsoft JhengHei', 11), bg='white').pack(anchor=tk.W, pady=5)
-        self.pulse_entry = tk.Entry(form_frame, font=('Microsoft JhengHei', 12), width=20)
+        self.pulse_entry = ttk.Spinbox(form_frame, from_=0, to=300, 
+                                       font=('Microsoft JhengHei', 12), width=18)
+        self.pulse_entry.set(70) # 設定預設值，例如70 bpm
         self.pulse_entry.pack(pady=5)
-        
+
         # 測量側
         tk.Label(form_frame, text="測量側:", 
                 font=('Microsoft JhengHei', 11), bg='white').pack(anchor=tk.W, pady=5)
-        self.position_var = tk.StringVar(value="左手")
+        # --- 修改開始：取得最近一次的測量位置 ---
+        default_position = ""
+        session = get_session()
+        try:
+            last_record = session.query(BloodPressureRecord).order_by(
+                BloodPressureRecord.measured_at.desc()
+            ).first()
+            if last_record and last_record.position:
+                default_position = last_record.position.value
+        finally:
+            session.close()
+       
+        self.position_var = tk.StringVar(value=default_position)
+        # --- 修改結束 ---
+
         position_frame = tk.Frame(form_frame, bg='white')
         position_frame.pack(pady=5)
         tk.Radiobutton(position_frame, text="左手", variable=self.position_var, 
