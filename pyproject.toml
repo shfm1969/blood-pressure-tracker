@@ -1,0 +1,43 @@
+ [build-system]
+ requires = ["hatchling>=1.18.0"]
+ build-backend = "hatchling.build"
+
+ [project]
+ name = "blood-pressure-tracker"
+ version = "0.1.0"
+ description = "血壓與脈搏記錄桌面應用程式"
+ readme = "README.md"
+ requires-python = ">=3.10"
+ authors = [
+   { name = "Your Name" }
+ ]
+
+ dependencies = [
+   # 資料庫
+   "sqlalchemy>=2.0.0",
+
+   # 資料處理與分析
+   "pandas>=2.0.0",
+   "numpy>=1.24.0",
+
+   # 圖表繪製
+   "matplotlib>=3.7.0",
+   "plotly>=5.14.0",
+
+   # PDF 導出
+   "reportlab>=4.0.0",
+
+   # 日期時間處理
+   "python-dateutil>=2.8.0",
+ ]
+
+ [tool.uv]
+ # 預設使用 .venv 為虛擬環境資料夾
+ # 可以之後視需要增加 dependency-groups 等進階設定
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "models",
+  "utils",
+  "views",
+]
