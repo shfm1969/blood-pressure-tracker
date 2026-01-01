@@ -35,3 +35,4 @@ def get_category_color(category: str) -> str:
     }
     return color_map.get(category, "gray")
 
+
